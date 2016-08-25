@@ -1,0 +1,16 @@
+{
+  "name": "node-images",
+  "version": "1.0.0",
+  "description": "Create multiple versions and sizes of images based from a set of source files",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mkdirp": "^0.5.1",
+    "phantomjs-prebuilt": "^2.1.12",
+    "xmldom": "^0.1.22"
+  }
+}
