@@ -2,7 +2,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var buildSvg = require('../lib/buildsvg.js');
+var buildSvg = require('./lib/buildsvg.js');
 
 var svgtosvg = function(options) {
 

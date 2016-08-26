@@ -37,7 +37,7 @@ var svgtopng = function(options) {
                     // Run the phantomjs process with the arguments set.
                     outputSizes.forEach(function(dimension){
                         var args = [
-                            path.join(__dirname, '../lib/buildpng.js'),
+                            path.join(__dirname, './lib/buildpng.js'),
                             path.join(dir, file),
                             path.join(options.dest, icon, filename + '_' + dimension.toString() + '.png'),
                             dimension.toString()
