@@ -4,6 +4,9 @@ var path = require('path');
 var childProcess = require('child_process');
 var phantomjs = require('phantomjs-prebuilt');
 var fs = require('fs');
+var grunt = require('grunt');
+
+grunt.log.warn('@TODO Update svgtopng.js to use Grunt filesystem API!');
 
 var svgtopng = function(options) {
 
