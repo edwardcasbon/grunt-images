@@ -3,8 +3,6 @@
 var grunt = require('grunt');
 var DOMParser = require('xmldom').DOMParser;
 var XMLSerializer = require('xmldom').XMLSerializer;
-var SVGO = require('svgo');
-var svgo = new SVGO();
 
 var buildSvg = {
     build: function(args, cb) {
@@ -22,10 +20,9 @@ var buildSvg = {
         var XMLSerializerInstance = new XMLSerializer();
         var svgAsString = XMLSerializerInstance.serializeToString(svg);
 
-        // Save optimised svg file.
-        svgo.optimize(svgAsString, function(result){
-            grunt.file.write(args[1], result.data);
-        });
+        // Save file.
+        grunt.log.writeln("Creating " + args[1]);
+        grunt.file.write(args[1], svgAsString);
     }
 };
 

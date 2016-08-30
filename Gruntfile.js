@@ -27,15 +27,30 @@ module.exports = function(grunt) {
             options: config
         },
 
-
         // Convert svg source files to different sized svg files.
         svgtosvg: {
             options: config
+        },
+
+        // Optimise images.
+        imagemin: {
+            dynamic: {
+                options: {
+                    optimizationLevel: 7
+                },
+                files: [{
+                    expand: true,
+                    cwd: config.dest,
+                    src: ['**/*.{png,svg}'],
+                    dest: config.dest
+                }]
+            }
         }
 
     });
 
     grunt.loadTasks('tasks');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-    grunt.registerTask('default', ['svgtopng', 'svgtosvg']);
+    grunt.registerTask('default', ['svgtopng', 'svgtosvg', 'imagemin']);
 };

@@ -37,11 +37,8 @@ var svgtopng = function(options) {
                 ];
 
                 // Build PNGs using PhantomJS.
-                childProcess.execFile(phantomjs.path, args, function(err, stdout, stderr){
-                    if(err) {
-                        console.error(err);
-                    }
-                });
+                grunt.log.writeln('Creating ' + args[2]);
+                childProcess.execFileSync(phantomjs.path, args);
             });
         }
     });
