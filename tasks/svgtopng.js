@@ -8,41 +8,41 @@ var grunt = require('grunt');
 var svgtopng = function(options) {
 
     // Loop through options.src subdirectories.
-    grunt.file.recurse(path.join(options.src), function(abspath, rootdir, subdir, file){
+    grunt.file.recurse(options.src, function(abspath, rootdir, subdir, file){
 
         // If there's a subdirectory and the file is an SVG, then continue.
         if(subdir && (file.slice(-4) === ".svg")) {
 
-                // Get the filename without the dimension.
-                var filename = file.slice(0, file.lastIndexOf('_'));
+            // Get the filename without the dimension.
+            var filename = file.slice(0, file.lastIndexOf('_'));
 
-                // Get the src size (denoted by the filename x_y.svg where y is the dimension)
-                var sourceSize = file.slice(file.lastIndexOf('_') +1, -4);
+            // Get the src size (denoted by the filename x_y.svg where y is the dimension)
+            var sourceSize = file.slice(file.lastIndexOf('_') +1, -4);
 
-                // Work out the output sizes from the config.sizes array.
-                var outputSizes;
-                options.sizes.forEach(function(s) {
-                    if(s.in == sourceSize) {
-                        outputSizes = s.out;
+            // Work out the output sizes from the config.sizes array.
+            var outputSizes;
+            options.sizes.forEach(function(s) {
+                if(s.in == sourceSize) {
+                    outputSizes = s.out;
+                }
+            });
+
+            // Run the phantomjs process with the arguments set.
+            outputSizes.forEach(function(dimension){
+                var args = [
+                    path.join(__dirname, './lib/buildpng.js'),
+                    abspath,
+                    path.join(options.dest, subdir, filename + '_' + dimension.toString() + '.png'),
+                    dimension.toString()
+                ];
+
+                // Build PNGs using PhantomJS.
+                childProcess.execFile(phantomjs.path, args, function(err, stdout, stderr){
+                    if(err) {
+                        console.error(err);
                     }
                 });
-
-                // Run the phantomjs process with the arguments set.
-                outputSizes.forEach(function(dimension){
-                    var args = [
-                        path.join(__dirname, './lib/buildpng.js'),
-                        abspath,
-                        path.join(options.dest, subdir, filename + '_' + dimension.toString() + '.png'),
-                        dimension.toString()
-                    ];
-
-                    // Build PNGs using PhantomJS.
-                    childProcess.execFile(phantomjs.path, args, function(err, stdout, stderr){
-                        if(err) {
-                            console.error(err);
-                        }
-                    });
-                });
+            });
         }
     });
 };
