@@ -1,20 +1,21 @@
 'use strict';
 
 var config = {
-    "src": "/Users/edward.casbon/Desktop/svgs",
-    "dest": "/Users/edward.casbon/Desktop/svgs-dest-node",
-    "sizes": [
+    'name': 'icons',
+    'src': '/Users/edward.casbon/Desktop/svgs',
+    'dest': '/Users/edward.casbon/Desktop/svgs-dest-node',
+    'sizes': [
         {
-            "in": 16,
-            "out": [16]
+            'in': 16,
+            'out': [16]
         },
         {
-            "in": 24,
-            "out": [24, 48, 96]
+            'in': 24,
+            'out': [24, 48, 96]
         },
         {
-            "in": 32,
-            "out": [32, 64, 128, 256]
+            'in': 32,
+            'out': [32, 64, 128, 256]
         }
     ]
 }
@@ -45,12 +46,25 @@ module.exports = function(grunt) {
                     dest: config.dest
                 }]
             }
+        },
+
+        webfont: {
+            dynamic: {
+                src: config.src + '/**/*_16.svg', // Use the 16px version to create web font.
+                dest: config.dest + '/webfont',
+                options: {
+                    font: config.name,
+                    types: 'eot,woff2,woff,ttf,svg',
+                    hashes: false,
+                }
+            }
         }
 
     });
 
     grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-webfont');
 
-    grunt.registerTask('default', ['svgtopng', 'svgtosvg', 'imagemin']);
+    grunt.registerTask('default', ['svgtopng', 'svgtosvg', 'imagemin', 'webfont']);
 };

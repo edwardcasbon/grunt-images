@@ -30,7 +30,7 @@ var svgtosvg = function(options) {
             outputSizes.forEach(function(dimension){
                 var args = [
                     abspath,
-                    path.join(options.dest, subdir, filename + '_' + dimension.toString() + '.svg'),
+                    path.join(options.dest, 'svg', subdir, filename + '_' + dimension.toString() + '.svg'),
                     dimension.toString()
                 ];
 

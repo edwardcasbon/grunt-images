@@ -11,6 +11,7 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-webfont": "^1.6.0",
     "phantomjs-prebuilt": "^2.1.12",
     "xmldom": "^0.1.22"
   }

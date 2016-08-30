@@ -32,7 +32,7 @@ var svgtopng = function(options) {
                 var args = [
                     path.join(__dirname, './lib/buildpng.js'),
                     abspath,
-                    path.join(options.dest, subdir, filename + '_' + dimension.toString() + '.png'),
+                    path.join(options.dest, 'png', subdir, filename + '_' + dimension.toString() + '.png'),
                     dimension.toString()
                 ];
 
